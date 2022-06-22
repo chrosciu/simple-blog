@@ -2,6 +2,8 @@
 
 This application is created in order to show IntelliJ debugger features
 
+**NOTE:** To show all these features application must be started with **Debug** option instead of **Run** !!!
+
 ## Covered features
 
 ### Running additional code for debugging
@@ -43,9 +45,17 @@ String.format("Filtering post: %s with query: %s, result: %b", post, query, post
 
 Add breakpoint in `PostService` class in first line of `getPost` method.
 
-Go to Frames pane, RMB on top frame and select `Force return` option
+Go to Frames pane, RMB on top frame and select `Force return` option. Type following code as a return value:
 
-Then repeat with `Throw exception` option.
+```java
+new PostContentDto("Hello");
+```
+
+Then repeat with `Throw exception` option. Type following code as an exception to be thrown:
+
+```java
+new PostException("Muahaha !");
+```
 
 Then repeat with `Drop frame` option.
 
@@ -64,7 +74,9 @@ catch (Exception e) {
 }
 ```
 
-Then add exception breakpoint for caught `PostException` exception
+Then add exception breakpoint for **caught** `PostException` exception
+
+Finally try to add post with title longer than 20 characters to spawn such exception 
 
 ### Debugging streams
 
