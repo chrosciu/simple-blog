@@ -1,12 +1,19 @@
 package com.chrosciu.cli.action;
 
-import com.chrosciu.post.service.PostService;
-import java.util.Scanner;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-public interface Action {
-    void execute(PostService postService, Scanner scanner);
+@RequiredArgsConstructor
+@Getter
+public enum Action {
+    SHOW_POSTS_TITLES(1, new ShowPostsTitlesCommand(), false),
+    SEARCH_POSTS(2, new SearchPostsCommand(), false),
+    SHOW_POST_CONTENT(3, new ShowPostContentCommand(), false),
+    ADD_POST(4, new AddPostCommand(), false),
+    EXIT_APPLICATION(0, new ExitApplicationCommand(), false),
+    NO_OP(null, new NoOpCommand(), false);
 
-    default boolean shouldTerminate() {
-        return false;
-    }
+    private final Integer code;
+    private final Command command;
+    private final boolean terminal;
 }

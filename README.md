@@ -6,6 +6,20 @@ This application is created in order to show IntelliJ debugger features
 
 ## Covered features
 
+### Conditional breakpoints
+
+Add breakpoint in `BlogCli` class in following line
+
+```java
+action.getCommand().execute(postService, scanner);
+```
+
+and set condition to:
+
+```java
+Action.EXIT_APPLICATION == action
+```
+
 ### Running additional code for debugging
 
 Add non-suspending breakpoint in `BlogApplication` class in following line:
@@ -40,6 +54,19 @@ Then add following code in `Evaluate and log` section:
 ```java
 String.format("Filtering post: %s with query: %s, result: %b", post, query, post.getTitle().contains(query) || post.getContent().contains(query));
 ```
+### Catching swallowed exceptions
+
+Add exception breakpoint for **caught** `PostException` exception
+
+Try to add post with title longer than 20 characters to spawn such exception
+
+### Altering variables
+
+Add breakpoint in `PostService` class in first line of `getPost` method.
+
+Then alter the value of `postId` variable and see what happens.
+
+Then try to alter the value of `posts` field in the class and see that **final** fields cannot be changed
 
 ### Forcing return / throwing exception / dropping frame
 
@@ -48,7 +75,7 @@ Add breakpoint in `PostService` class in first line of `getPost` method.
 Go to Frames pane, RMB on top frame and select `Force return` option. Type following code as a return value:
 
 ```java
-new PostContentDto("Hello");
+Optional.of(new PostContentDto("Hello"));
 ```
 
 Then repeat with `Throw exception` option. Type following code as an exception to be thrown:
@@ -57,26 +84,11 @@ Then repeat with `Throw exception` option. Type following code as an exception t
 new PostException("Muahaha !");
 ```
 
-Then repeat with `Drop frame` option.
+Then repeat with `Reject frame` option.
 
-NOTE: With `Drop frame` option following restrictions apply:
-* any frame can be dropped, not only the top one
+NOTE: With `Reject frame` option following restrictions apply:
+* any frame can be rejected, not only the top one
 * values of params passed to reentered frame cannot be modified
-
-
-### Catching swallowed exceptions
-
-Go to the `BlogCli` class and change the catch clause to:
-
-```java
-catch (Exception e) {
-   //NO-OP    
-}
-```
-
-Then add exception breakpoint for **caught** `PostException` exception
-
-Finally try to add post with title longer than 20 characters to spawn such exception 
 
 ### Debugging streams
 

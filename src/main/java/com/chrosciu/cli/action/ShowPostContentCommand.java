@@ -3,12 +3,15 @@ package com.chrosciu.cli.action;
 import com.chrosciu.post.service.PostService;
 import java.util.Scanner;
 
-public class ShowPostContentAction implements Action {
+class ShowPostContentCommand implements Command {
     @Override
     public void execute(PostService postService, Scanner scanner) {
         System.out.println("Enter post id:");
-        var postId = scanner.nextInt();
+        var line = scanner.nextLine();
+        var postId = Integer.parseInt(line);
         var postContentDto = postService.getPost(postId);
-        System.out.println(postContentDto.getContent());
+        postContentDto.ifPresentOrElse(
+            dto -> System.out.println(dto.getContent()),
+            () -> System.out.println("No post found with given id"));
     }
 }

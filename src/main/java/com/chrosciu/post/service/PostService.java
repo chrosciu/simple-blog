@@ -6,6 +6,7 @@ import com.chrosciu.post.transfer.NewPostDto;
 import com.chrosciu.post.transfer.PostContentDto;
 import com.chrosciu.post.transfer.ShortPostDto;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -25,12 +26,11 @@ public class PostService {
             .toList();
     }
 
-    public PostContentDto getPost(int postId) {
+    public Optional<PostContentDto> getPost(int postId) {
         return posts.stream()
             .filter(post -> postId == post.getId())
             .map(post -> new PostContentDto(post.getContent()))
-            .findFirst()
-            .orElseThrow(() -> new PostException("Post with given id is not found"));
+            .findFirst();
     }
 
     public int addPost(NewPostDto newPostDto) {
