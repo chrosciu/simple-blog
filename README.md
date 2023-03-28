@@ -43,7 +43,7 @@ postService.addPost(new com.chrosciu.post.NewPostDto(
 
 ### Logging with breakpoints
 
-Add non-suspending breakpoint (lambda only!) in `PostService` class in following line
+Add non-suspending breakpoint (lambda only!) in `PostService` class in following line in `searchPosts` method
 
 ```java
 .filter(post -> post.getTitle().contains(query) || post.getContent().contains(query))
@@ -117,5 +117,15 @@ Go to the `PostService` class and add breakpoints in following lines in `searchP
 ```
 
 Note that such breakpoints may be set both for lines and lambdas !
+
+### Marking objects
+
+Add breakpoint in any line in `PostService` class. 
+Then after hitting it find `PostService` instance in `Variables` pane select `Mark Object...` option from context menu.
+Enter `postService` as label name and resume program.
+
+Add breakpoint in any line in `BlogCli` class. 
+Then after hitting it check that previously marked `PostService` instance can be accessed in `Variables` pane as `postService_DebugLabel` variable. 
+
 
 
