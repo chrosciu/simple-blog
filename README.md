@@ -58,7 +58,7 @@ String.format("Filtering post: %s with query: %s, result: %b", post, query, post
 
 Add exception breakpoint for **caught** `PostException` exception
 
-Try to add post with title longer than 20 characters to spawn such exception
+Then try to add post with title longer than 20 characters to throw such exception
 
 ### Altering variables
 
@@ -67,6 +67,22 @@ Add breakpoint in `PostService` class in first line of `getPost` method.
 Then alter the value of `postId` variable and see what happens.
 
 Then try to alter the value of `posts` field in the class and see that **final** fields cannot be changed
+
+### Hot swapping methods
+
+Go to `PostService` and find following line in `addPost` method:
+
+```java
+nextId = nextId + 1;
+```
+
+Replace it with:
+
+```java
+nextId = nextId + 2;
+```
+
+Then select `Compile And Reload File` option from context menu and wait until class is recompiled and hot swapped.
 
 ### Forcing return / throwing exception / dropping frame
 
@@ -92,7 +108,7 @@ NOTE: With `Reject frame` option following restrictions apply:
 
 ### Debugging streams
 
-Go to the `PostService` class and add breakpoints in following lines
+Go to the `PostService` class and add breakpoints in following lines in `searchPosts` method
 
 ```java
 .filter(post -> post.getTitle().contains(query) || post.getContent().contains(query))
