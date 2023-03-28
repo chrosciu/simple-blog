@@ -3,7 +3,7 @@ package com.chrosciu.cli;
 import static com.chrosciu.cli.action.Action.NO_OP;
 
 import com.chrosciu.cli.action.Action;
-import com.chrosciu.post.service.PostService;
+import com.chrosciu.post.PostService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;

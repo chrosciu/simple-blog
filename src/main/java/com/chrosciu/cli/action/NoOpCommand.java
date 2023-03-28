@@ -1,6 +1,6 @@
 package com.chrosciu.cli.action;
 
-import com.chrosciu.post.service.PostService;
+import com.chrosciu.post.PostService;
 import java.util.Scanner;
 
 class NoOpCommand implements Command {

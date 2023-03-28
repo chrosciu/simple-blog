@@ -1,10 +1,5 @@
-package com.chrosciu.post.service;
+package com.chrosciu.post;
 
-import com.chrosciu.post.exception.PostException;
-import com.chrosciu.post.model.Post;
-import com.chrosciu.post.transfer.NewPostDto;
-import com.chrosciu.post.transfer.PostContentDto;
-import com.chrosciu.post.transfer.ShortPostDto;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PostService {
     private final List<Post> posts;
+    private static int nextId = 0;
 
     public List<ShortPostDto> getAllPosts() {
         return posts.stream()
@@ -37,9 +33,8 @@ public class PostService {
         if (newPostDto.getTitle().length() > 20) {
             throw new PostException("Title is too long! (may be up to 20 characters)");
         }
-        int maxId = posts.stream().mapToInt(Post::getId).max().orElse(-1);
-        int newId = maxId + 1;
-        posts.add(new Post(newId, newPostDto.getTitle(), newPostDto.getContent()));
-        return newId;
+        nextId = nextId + 1;
+        posts.add(new Post(nextId, newPostDto.getTitle(), newPostDto.getContent()));
+        return nextId;
     }
 }

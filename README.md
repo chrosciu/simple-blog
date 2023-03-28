@@ -31,11 +31,11 @@ blogCli.run();
 Then add following code in `Evaluate and log` section:
 
 ```java
-postService.addPost(new com.chrosciu.post.transfer.NewPostDto(
+postService.addPost(new com.chrosciu.post.NewPostDto(
     "Debugger sucks",
     "I cannot find any bug in my app, give me something better !")
 );
-postService.addPost(new com.chrosciu.post.transfer.NewPostDto(
+postService.addPost(new com.chrosciu.post.NewPostDto(
     "Sneaky streams",
     "What really happens in this inferno ?")
 );
