@@ -33,7 +33,7 @@ public class PostService {
         if (newPostDto.getTitle().length() > 20) {
             throw new PostException("Title is too long! (may be up to 20 characters)");
         }
-        nextId = nextId + 1;
+        nextId = nextId + 2;
         posts.add(new Post(nextId, newPostDto.getTitle(), newPostDto.getContent()));
         return nextId;
     }

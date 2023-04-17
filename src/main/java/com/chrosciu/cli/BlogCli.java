@@ -38,6 +38,7 @@ public class BlogCli {
                     break;
                 }
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
